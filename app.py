@@ -1,5 +1,6 @@
 import customtkinter as ctk #for GUI
 import webbrowser #for giving credits and sourcing themes
+import json #for line 209
 from cryptography.fernet import Fernet #to encrypt and decrypt
 from CTkMessagebox import CTkMessagebox #for error messages and other
 from PIL import Image #for GUI icons
@@ -198,6 +199,21 @@ settings_btn_sidebar.grid(row=5, column=0, sticky="ew")
 guide_btn_sidebar.grid(row=6, column=0, sticky="ew")
 blank_btn_sidebar.grid(row=7, column=0, sticky="ew")
 creditz_btn_sidebar.grid(row=8, column=0, sticky="ew") 
+
+#frames 
+
+#key generator framee
+key_gen_frame = ctk.CTkFrame(root,  corner_radius=0, fg_color="transparent") #makes the frame
+lable_one = ctk.CTkLabel(key_gen_frame, text="Generate An Encryption Key", font=("Consolas bold", 18)) #make a text label
+generate_key_button = ctk.CTkButton(key_gen_frame, height=30, width=200, text="Generate A New Key") #make a button
+lable_two = ctk.CTkLabel(key_gen_frame, text="Existing Encryption Keys", font=("Consolas bold", 18)) #make another text label
+#make an embedded json list and a table to list out keys
+
+
+key_gen_frame.grid(row=0, column=1, sticky="nsew")
+lable_one.pack(padx=10, pady=5, anchor=ctk.W)
+generate_key_button.pack(padx=60, pady=8)
+lable_two.pack(padx=10, pady=(17,5), anchor=ctk.W)
 
 # window display
 root.mainloop()
