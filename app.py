@@ -1,10 +1,11 @@
+from textwrap import fill
 import customtkinter as ctk #for GUI
 import webbrowser #for giving credits and sourcing themes
 import json #for line 209
 from cryptography.fernet import Fernet #to encrypt and decrypt
 from CTkMessagebox import CTkMessagebox #for error messages and other
 from PIL import Image #for GUI icons
-from tkinter import filedialog as fd #for getting file paths
+from tkinter import Scrollbar, filedialog as fd #for getting file paths
 
 #define themes
 ctk.set_appearance_mode("Dark") #set default theme to dark
@@ -14,7 +15,7 @@ ctk.set_default_color_theme("themes/violet.json") #set color scheme to violet (C
 root = ctk.CTk() #defines root
 root.resizable(False, False) #disables resizing
 root.title("KeeperS | Encryptor And Decryptor 1.0v") #sets title
-root.geometry("550x320") #sets window size
+root.geometry("560x320") #sets window size
 root.iconbitmap("icons/app.ico") #sets app icon
 
 #functions
@@ -217,25 +218,29 @@ lable_two.pack(padx=10, pady=(17,5), anchor=ctk.W) #pack label two
 
 #encrypt text frem
 encrypt_text_frame = ctk.CTkFrame(root, corner_radius=0, fg_color="transparent") #makes a frame
+scrollbar_encrypt_text_frame = ctk.CTkScrollbar(encrypt_text_frame) #define scrollbar
 lable_three = ctk.CTkLabel(encrypt_text_frame, text="Encrypt Text", font=("Consolas bold", 18)) #make a text label # under: encrypt_text_frame
 label_four = ctk.CTkLabel(encrypt_text_frame, text="Select Key :-", font=("Arial", 12)) #make a text label # under: encrypt_text_frame
-keys_path_enc_txt_entry = ctk.CTkEntry(encrypt_text_frame, width=300, height=30, placeholder_text="Key File Path") #key file entry
+frame_in_encrypt_text_frame = ctk.CTkFrame(encrypt_text_frame, corner_radius=0, fg_color="transparent") #makes a frame
+keys_path_enc_txt_entry = ctk.CTkEntry(frame_in_encrypt_text_frame, width=300, height=30, placeholder_text="Key File Path") #key file entry
 browse_icon = ctk.CTkImage(Image.open("icons/browse.png")) #browse files icon
-browse_key_enc_txt_button = ctk.CTkButton(encrypt_text_frame, width=30, height=30, image=browse_icon, text="") # add the browse files button
+browse_key_enc_txt_button = ctk.CTkButton(frame_in_encrypt_text_frame, width=30, height=30, image=browse_icon, text="") # add the browse files button
 label_five = ctk.CTkLabel(encrypt_text_frame, text="Text To Encrypt :-", font=("Arial", 12)) #make a text label
-text_to_encrypt_textbox = ctk.CTkTextbox(encrypt_text_frame, width=330, height=100, border_width=2, corner_radius=10) #make a textbox
+text_to_encrypt_textbox = ctk.CTkTextbox(encrypt_text_frame, width=330, height=70, border_width=2, corner_radius=10) #make a textbox
 label_six = ctk.CTkLabel(encrypt_text_frame, text="Encrypted Text :-", font=("Arial", 12)) #make text label
-encrypted_text_textbox = ctk.CTkTextbox(encrypt_text_frame, width=330, height=100, border_width=2, corner_radius=10) #make a textbox
+encrypted_text_textbox = ctk.CTkTextbox(encrypt_text_frame, width=330, height=70, border_width=2, corner_radius=10) #make a textbox
 encrypt_text_button = ctk.CTkButton(encrypt_text_frame, text="Encrypt Text") #make the encrypt button
 
 encrypt_text_frame.grid(row=0, column=1, sticky="nsew") #align encrypt_text_frame
+scrollbar_encrypt_text_frame.pack(side=ctk.RIGHT, fill=ctk.Y)
 lable_three.pack(padx=10, pady=5, anchor=ctk.W) #pack label 3
 label_four.pack(padx=10, pady=(10,5), anchor=ctk.W) #pack label 4
-keys_path_enc_txt_entry.pack(padx=10, pady=(0,5)) #pack entry
-browse_key_enc_txt_button.pack() #pack browse button
-label_five.pack(padx=5, pady=5) #pack lable 5
+frame_in_encrypt_text_frame.pack(padx=10, pady=(0,5)) #pack frame
+keys_path_enc_txt_entry.pack(side=ctk.LEFT, padx=10, pady=(0,5)) #pack entry
+browse_key_enc_txt_button.pack(side=ctk.LEFT) #pack browse button
+label_five.pack(padx=5, anchor=ctk.W) #pack lable 5
 text_to_encrypt_textbox.pack(padx=5, pady=5) #pack textbox
-label_six.pack(padx=5, pady=5) #pack label 6
+label_six.pack(padx=5, pady=(5,0), anchor=ctk.W) #pack label 6
 encrypted_text_textbox.pack(padx=5, pady=5) #pack textbox
 encrypt_text_button.pack(padx=5, pady=5) #pack encrypt button
 
